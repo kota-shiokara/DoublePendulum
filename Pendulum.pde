@@ -3,6 +3,9 @@ class Pendulum {
     int n = 0;
     int nowN = 0;
 
+    // deltaTime
+    float dTime = 0.01;
+
     // 質点の質量
     float mass1 = 0;
     float mass2 = 0;
@@ -80,9 +83,9 @@ class Pendulum {
     void rungeKutta(){
         j[0][0] = this.omega1;
         j[1][0] = this.omega2;
-        k[0][0] = (gravity * (sin(this.theta2) * cosTheta - this.mu * sin(this.theta1))
+        k[0][0] = dTime * (gravity * (sin(this.theta2) * cosTheta - this.mu * sin(this.theta1))
           - (this.line1 * pow(this.omega1, 2) * cosTheta + this.line2 * pow(this.omega2, 2)) * sinTheta) / (this.line1 * (this.mu - pow(cosTheta, 2)));
-        k[1][0] = (gravity * this.mu * (sin(this.theta1) * cosTheta - sin(this.theta2))
+        k[1][0] = dTime * (gravity * this.mu * (sin(this.theta1) * cosTheta - sin(this.theta2))
           - (this.mu * this.line1 * pow(this.omega1, 2) + this.line2 * pow(this.omega2, 2) * cosTheta) * sinTheta) / (this.line2 * (this.mu - pow(cosTheta, 2)));
 
         dTheta = (theta1 + j[0][0] * 0.5) - (theta2 + j[1][0] * 0.5);
@@ -119,12 +122,12 @@ class Pendulum {
     }
 
     float rk1(int i){
-        return (gravity * (sin(this.theta2 + j[1][i-1] * 0.5) * cosTheta - this.mu * sin(this.theta1 + j[0][i-1] * 0.5)) 
+        return dTime * (gravity * (sin(this.theta2 + j[1][i-1] * 0.5) * cosTheta - this.mu * sin(this.theta1 + j[0][i-1] * 0.5)) 
             - (this.line1 * pow(this.omega1 + k[0][i-1] * 0.5, 2) * cosTheta + this.line2 * pow(this.omega2 + k[1][i-1] * 0.5, 2)) * sinTheta) / (this.line1 * (this.mu - pow(cosTheta, 2)));
     }
 
     float rk2(int i){
-        return (gravity * this.mu * (sin(this.theta1 + j[1][i-1] * 0.5) * cosTheta - sin(this.theta2 + j[1][i-1] * 0.5))
+        return dTime * (gravity * this.mu * (sin(this.theta1 + j[1][i-1] * 0.5) * cosTheta - sin(this.theta2 + j[1][i-1] * 0.5))
             - (this.mu * this.line1 * pow(this.omega1 + k[0][i-1] * 0.5, 2) + this.line2 * pow(this.omega2 + k[1][i-1] * 0.5, 2) * cosTheta) * sinTheta) / (this.line2 * (this.mu - pow(cosTheta, 2)));
     }
 

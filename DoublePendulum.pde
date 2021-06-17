@@ -1,7 +1,7 @@
 Pendulum p;
 
 void setup() {
-    size(600, 600);
+    size(400, 400);
     p = new Pendulum(1000);
     p.setMass(20, 20);
     p.setLine(100, 100);
@@ -19,6 +19,6 @@ void draw() {
 
 void keyPressed() {
     if(key == 's'){
-        save("frame/start.png");
+        save("frame/second.png");
     }
 }
