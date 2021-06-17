@@ -16,3 +16,9 @@ void draw() {
     p.update();
     p.display();
 }
+
+void keyPressed() {
+    if(key == 's'){
+        save("frame/start.png");
+    }
+}
