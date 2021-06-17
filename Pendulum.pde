@@ -52,6 +52,7 @@ class Pendulum {
 
     void update(){
         rungeKutta();
+        if(y1 <= -99) println("clear!");
     }
 
     void display(){

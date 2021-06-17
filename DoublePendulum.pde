@@ -7,7 +7,7 @@ void setup() {
     p.setLine(100, 100);
     p.setTheta(radians(145), radians(145));
     p.endSet();
-    frameRate(30);
+    //frameRate(30);
 }
 
 void draw() {
